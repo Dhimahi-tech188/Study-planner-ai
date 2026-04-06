@@ -13,5 +13,7 @@ app.post("/ask", async (req, res) => {
     reply: "This is your AI response (we will connect real AI next)"
   });
 });
-
+app.get("/", (req, res) => {
+  res.sendFile("index.html", { root: "." });
+});
 app.listen(3000, () => console.log("Server running"));
