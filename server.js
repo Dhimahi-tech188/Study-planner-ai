@@ -1,26 +1,17 @@
-
-import express from "express";
-import cors from "cors";
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
 app.post("/ask", (req, res) => {
-  const userMessage = req.body.message;
+  const msg = req.body.message.toLowerCase();
 
-  res.json({
-    reply: "You said: " + userMessage
-  });
-});
+  let reply = "";
 
-app.get("/", (req, res) => {
-  res.sendFile("index.html", { root: "." });
-});
+  if (msg.includes("hello")) {
+    reply = "Hi! How can I help you?";
+  } else if (msg.includes("study")) {
+    reply = "Make a timetable and study daily!";
+  } else if (msg.includes("math")) {
+    reply = "Practice daily and understand concepts.";
+  } else {
+    reply = "I am still learning 🤖";
+  }
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log("Server running...");
+  res.json({ reply });
 });
