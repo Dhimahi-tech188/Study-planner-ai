@@ -1,19 +1,26 @@
+
 import express from "express";
-import fetch from "node-fetch";
 import cors from "cors";
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
-app.post("/ask", async (req, res) => {
+app.post("/ask", (req, res) => {
   const userMessage = req.body.message;
 
   res.json({
-    reply: "This is your AI response (we will connect real AI next)"
+    reply: "You said: " + userMessage
   });
 });
+
 app.get("/", (req, res) => {
   res.sendFile("index.html", { root: "." });
 });
-app.listen(3000, () => console.log("Server running"));
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("Server running...");
+});
